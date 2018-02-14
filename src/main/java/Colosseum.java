@@ -73,6 +73,34 @@ public class Colosseum {
      */
     public static Pokemon buildPokemon() {
         Pokemon tempPokemon = new Pokemon();
+        System.out.println("Please name your Pokemon: ");
+        tempPokemon.name = myScan.next();
+        System.out.println("How many hit point will it have: ");
+        int hit = myScan.nextInt();
+        while (hit < 1 || hit > MAX_HIT_POINTS) {
+            System.out.println("Sorry. Hit points must be between 1 and 50: ");
+            hit = myScan.nextInt();
+        }
+        tempPokemon.hitPoints = hit;
+        int maxAttack = hit - 1;
+        String maxAttackString = "" + maxAttack;
+        System.out.println("Split points between attack level and defense level");
+        System.out.println("Enter your attack level (1-" + maxAttackString + "): ");
+        int attack = myScan.nextInt();
+        while (attack < 1 || attack > maxAttack) {
+            System.out.println("Sorry. The attack level must be between 1 and " + maxAttackString + ": ");
+            attack = myScan.nextInt();
+        }
+        tempPokemon.attackLevel = attack;
+        int maxDefence = hit - attack;
+        String maxDefenceString = ""+ maxDefence;
+        System.out.println("Enter your attack level (1-" + maxDefenceString + "): ");
+        int defence = myScan.nextInt();
+        while (defence < 1 || defence > maxDefence) {
+            System.out.println("Sorry. The attack level must be between 1 and " + maxDefenceString + ": ");
+            defence = myScan.nextInt();
+        }
+        tempPokemon.defenseLevel = defence;
         return tempPokemon;
     }
 
@@ -90,7 +118,13 @@ public class Colosseum {
      * Implement this function.
      */
     public static void printWhoIsAhead() {
-        System.out.println("Implement me!");
+        if (firstPokemon.hitPoints > secondPokemon.hitPoints) {
+            System.out.println(firstPokemon.name + " is currently ahead!");
+        } else if (secondPokemon.hitPoints < firstPokemon.hitPoints) {
+            System.out.println(secondPokemon.name + " is currently ahead!");
+        } else {
+            System.out.println("They are tied!");
+        }
     }
 
     /**
